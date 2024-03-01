@@ -10,6 +10,7 @@ const signup = async (req, res, next) => {
     const user = new User({ ...req.body, password: hash });
     await user.save();
     res.status(200).json(user);
+    console.log(user);
   } catch (err) {
     next(err);
   }
