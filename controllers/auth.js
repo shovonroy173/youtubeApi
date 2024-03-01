@@ -22,7 +22,7 @@ const signin = async (req, res, next) => {
     if (!user) {
       //    return next(createError(404 , "User not found"));
       res.status(401).send("user not");
-    }
+    } 
     console.log(user.password);
     const isCorrect = bcrypt.compare(req.body.password, user.password);
     if (!isCorrect) {

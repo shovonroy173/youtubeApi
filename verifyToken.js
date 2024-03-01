@@ -2,9 +2,10 @@ const jwt = require("jsonwebtoken");
 const createError = require("./error");
 
 const verifyToken = (req , res , next)=>{
-    // const token = req.headers.token;
-    const token = process.env.ID;
-    console.log("token7VF",  token );
+    const fullToken = req.headers['Authorization'];
+    const token = fullToken.split("Bearer ")[1];
+    // const token = process.env.ID;
+    console.log("LINE AT 8 token",  token );
     if(!token){
         return next(createError(401 , "You are not authinticated"))
     };
