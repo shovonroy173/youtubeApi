@@ -9,17 +9,18 @@ const userRoute = require("./routes/users");
 const videoRoute = require("./routes/videos");
 const commentRoute = require("./routes/comments");
 const app = express();
+app.use(cookieParser());
+app.use(express.json());
 app.use(cors());
 dotenv.config();
-
+ 
 
 mongoose.connect(process.env.MONGO_URL )
                 .then(()=>{console.log("Database connnection");})
                 .catch((err)=>{console.log("Database not  connnected" , err);})
 
 
-app.use(cookieParser());
-app.use(express.json());
+
 app.use("/api/auth" , authRoute);
 app.use("/api/users" ,userRoute );
 app.use("/api/videos" , videoRoute );
@@ -27,7 +28,7 @@ app.use("/api/comments" , commentRoute)
 
 app.use((err , req , res , next)=>{
     const status = err.status || 500;
-    const messege = err.messege || "Something went wrong";
+    const messege = err.message || "Something went wrong";
     res.status(status).send({
         success:false , 
         status:status , 

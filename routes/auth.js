@@ -6,7 +6,7 @@ const router = express.Router();
 // create a user
  router.post("/signup", signup)
 // sing in 
-router.post("/signin", verifyToken ,  signin)
+router.post("/signin",  signin)
 
 // google auth
 router.post("/google", googleAuth)

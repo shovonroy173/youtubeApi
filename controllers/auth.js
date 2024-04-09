@@ -23,18 +23,19 @@ const signin = async (req, res, next) => {
       //    return next(createError(404 , "User not found"));
       res.status(401).send("user not");
     } 
-    console.log(user.password);
+    // console.log(user.password);
     const isCorrect = bcrypt.compare(req.body.password, user.password);
     if (!isCorrect) {
       return next(createError(404, "Invalid passowrd"));
     } else {
       const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+      console.log("LINE AT 32" , token);
+      user.token = token;
+      await user.save();
       res
-        .cookie("access_token", token, {
-          expires: new Date(Date.now() + 3600000),
-          httpOnly: true,
-        })
-        .json({...user._doc, ["accessToken"]: token});
+        .cookie("access_token", token);
+        res.status(200)
+        .json(user._doc);
     }
   } catch (err) {
     next(err);
