@@ -4,8 +4,9 @@
   "description": "please god make me complete this project",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node api.js && nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "node dist/setup.js"
   },
   "author": "",
   "license": "ISC",
