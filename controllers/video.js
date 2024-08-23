@@ -60,6 +60,7 @@ const deleteVideo = async (req, res, next) => {
 };
 
 const getVideo = async (req, res, next) => {
+  
   try {
     const video = await Video.findById(req.params.id);
     res.status(200).json(video);
@@ -115,8 +116,12 @@ const latest = async (req, res, next) => {
   }
 };
 const likes = async (req, res, next) => {
+  console.log(req);
+  
   try {
-    const videos = await Video.find({ likes: req.user.id });
+    const videos = await Video.find({ likes: req.params.like });
+    console.log(videos);
+    
     res.status(200).json(videos);
   } catch (error) {
     console.log(error);
